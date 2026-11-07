@@ -1,0 +1,471 @@
+<title>EducaRED Santo Domingo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700;800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: campo y río — banda de encabezado verde, catálogo filtrable, luego la propuesta 5W+H en bloques; todo en una columna de 1120px */
+:root{
+  --bg:#F3F6F4; --surface:#FFFFFF; --ink:#13291F; --muted:#55685F; --line:#D4DFD8;
+  --primary:#153C2B; --primary-soft:#E1ECE5; --on-primary:#FFFFFF;
+  --accent:#F1C74A; --accent-soft:#FCF3D4; --accent-ink:#5C4500;
+  --hero-a:#153C2B; --hero-b:#0E281D; --on-hero:#FFFFFF;
+  --river:#2D6C8C; --river-soft:#E0EDF4;
+  --ok:#2F7D4F; --ok-soft:#E2F2E8;
+  --display:"Bitter", Georgia, "Times New Roman", serif;
+  --body:"Figtree", "Segoe UI", Roboto, Arial, sans-serif;
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1611; --surface:#122219; --ink:#E4EEE9; --muted:#9BB0A6; --line:#24382D;
+    --primary:#6CC49A; --primary-soft:#183A2A; --on-primary:#06231A;
+    --accent:#F1C74A; --accent-soft:#3A2F12; --accent-ink:#F6DA92;
+    --hero-a:#153C2B; --hero-b:#0E281D; --on-hero:#FFFFFF;
+    --river:#73B3D2; --river-soft:#16303D;
+    --ok:#6CC795; --ok-soft:#173826;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1611; --surface:#122219; --ink:#E4EEE9; --muted:#9BB0A6; --line:#24382D;
+  --primary:#6CC49A; --primary-soft:#183A2A; --on-primary:#06231A;
+  --accent:#F1C74A; --accent-soft:#3A2F12; --accent-ink:#F6DA92;
+  --hero-a:#153C2B; --hero-b:#0E281D; --on-hero:#FFFFFF;
+  --river:#73B3D2; --river-soft:#16303D;
+  --ok:#6CC795; --ok-soft:#173826;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+h1,h2,h3{font-family:var(--display);line-height:1.2;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--river)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+/* Nav */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--surface)}
+.nav{position:sticky;top:env(safe-area-inset-top, 0px);z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:20px;color:var(--primary);text-decoration:none}
+.brand svg{flex:none}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.nav ul a{display:block;padding:6px 12px;border-radius:999px;color:var(--ink);text-decoration:none;font-weight:600;font-size:15px}
+.nav ul a:hover{background:var(--primary-soft);color:var(--primary)}
+
+/* Hero */
+.hero{background:linear-gradient(110deg,var(--hero-a),var(--hero-b));color:var(--on-hero)}
+.hero .wrap{padding-block:48px 40px;display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:end}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.hero h1{font-size:clamp(30px,4.6vw,48px);margin-top:10px;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:18px;max-width:58ch;opacity:.95}
+.pillars{display:grid;gap:10px}
+.pillar{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;background:color-mix(in srgb, var(--on-hero) 9%, transparent)}
+.pillar b{display:block;font-size:15px}
+.pillar span{font-size:14px;opacity:.9}
+.pillar svg{flex:none;margin-top:2px}
+
+/* Sections */
+section.block{padding-block:56px 8px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;margin-bottom:22px}
+.sec-head h2{font-size:clamp(24px,3vw,32px);color:var(--primary)}
+.sec-head p{color:var(--muted);max-width:62ch}
+
+/* Filters */
+.toolbar{display:grid;grid-template-columns:2fr repeat(4,1fr);gap:10px;margin-bottom:12px}
+.toolbar input,.toolbar select,.form input,.form select,.form textarea{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.toolbar label,.form label{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.result-line{color:var(--muted);font-size:14px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+
+.res{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.res-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.area{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--primary)}
+.res h3{font-size:19px}
+.res p.desc{color:var(--muted);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary)}
+.chip.off{background:var(--ok-soft);color:var(--ok)}
+.chip.on{background:var(--river-soft);color:var(--river)}
+.chip.lic{background:var(--accent-soft);color:var(--accent-ink)}
+.chip.inst{background:transparent;border:1px dashed var(--muted);color:var(--muted)}
+details.ficha{border-top:1px solid var(--line);padding-top:10px;margin-top:auto}
+details.ficha summary{cursor:pointer;font-weight:700;font-size:14px;color:var(--river)}
+dl.meta{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:10px 0 0;font-size:14px}
+dl.meta dt{color:var(--muted);font-weight:600}
+dl.meta dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.res .go{align-self:flex-start;font-weight:700;font-size:14px;text-decoration:none;padding:8px 14px;border-radius:10px;background:var(--primary);color:var(--on-primary)}
+.res .go.muted{background:var(--line);color:var(--muted);cursor:default}
+.empty{padding:28px;border:1px dashed var(--line);border-radius:var(--radius);text-align:center;color:var(--muted)}
+
+/* 5W+H */
+.wh{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.whcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;min-width:0}
+.whcard .q{font-family:var(--display);font-weight:800;color:var(--accent-ink);background:var(--accent-soft);display:inline-block;padding:2px 10px;border-radius:8px;font-size:15px}
+.whcard h3{font-size:21px;margin:10px 0 8px;color:var(--ink)}
+.whcard p+p{margin-top:8px}
+.whcard ul{margin:8px 0 0;padding-left:20px}
+.whcard li{margin:4px 0}
+.whcard.wide{grid-column:1/-1}
+
+/* Timeline */
+.phases{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:14px}
+.phase{border-top:4px solid var(--primary);padding-top:10px;min-width:0}
+.phase .when{font-size:13px;font-weight:700;color:var(--river);font-variant-numeric:tabular-nums}
+.phase b{display:block;font-family:var(--display);font-size:16px;margin:2px 0 4px}
+.phase span{font-size:14px;color:var(--muted)}
+
+/* Roles table */
+.tablebox{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+td:first-child{font-weight:700}
+
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.how div{background:var(--bg);border-radius:12px;padding:14px;min-width:0}
+.how b{display:block;font-family:var(--display);color:var(--primary);margin-bottom:4px}
+.how ul{margin:0;padding-left:18px;font-size:15px}
+
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px;font-size:14px;font-weight:600}
+.flow span{padding:6px 12px;border-radius:999px;background:var(--river-soft);color:var(--river)}
+.flow i{font-style:normal;color:var(--muted)}
+
+/* Licencias */
+.lic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.lic-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.lic-card code{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;color:var(--accent-ink);background:var(--accent-soft);padding:2px 8px;border-radius:6px}
+.lic-card p{margin-top:8px;font-size:15px;color:var(--muted)}
+
+/* Form */
+.form-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:start}
+.form{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form .full{grid-column:1/-1}
+.form button{grid-column:1/-1;font:inherit;font-weight:700;padding:12px;border:0;border-radius:10px;background:var(--primary);color:var(--on-primary);cursor:pointer}
+.preview{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;position:sticky;top:90px}
+.preview h3{font-size:18px;margin-bottom:6px}
+.status{display:inline-block;margin-top:12px;font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink)}
+
+footer{margin-top:64px;background:var(--surface);border-top:1px solid var(--line)}
+footer .wrap{padding-block:28px;display:grid;grid-template-columns:1.3fr 1fr;gap:20px;font-size:14px;color:var(--muted)}
+footer b{color:var(--ink)}
+
+@media (max-width:900px){
+  .hero .wrap,.form-wrap,footer .wrap{grid-template-columns:1fr}
+  .toolbar{grid-template-columns:1fr 1fr}
+  .toolbar .search{grid-column:1/-1}
+  .wh,.how,.lic-grid{grid-template-columns:1fr}
+  .phases{grid-template-columns:1fr 1fr}
+  .preview{position:static}
+}
+@media (max-width:520px){
+  .form{grid-template-columns:1fr}
+  .phases{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){
+  .res{transition:border-color .2s}
+  .res:hover{border-color:var(--primary)}
+}
+</style>
+
+<nav class="nav" aria-label="Principal">
+  <div class="wrap">
+    <a class="brand" href="#inicio">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="var(--primary)"/><path d="M16 25V13" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/><path d="M16 17c-4 0-6-3-6-6 3 0 6 2 6 6zM16 14c0-4 3-6 6-6 0 3-2 6-6 6z" fill="var(--accent)"/></svg>
+      EducaRED Santo Domingo
+    </a>
+    <ul>
+      <li><a href="#repositorio">Repositorio</a></li>
+      <li><a href="#propuesta">Propuesta 5W+H</a></li>
+      <li><a href="#licencias">Licencias</a></li>
+      <li><a href="#publicar">Publicar recurso</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Repositorio de Recursos Educativos Digitales Abiertos · Propuesta</div>
+      <h1>Recursos para aprender, <em>aunque no llegue la señal</em></h1>
+      <p class="lead">Repositorio REDA para todas las áreas de la Institución Educativa Técnica Agropecuaria y Comercial de San Pablo, sede Santo Domingo, en el sur de Bolívar. Reúne recursos abiertos, organizados por área y grado, que se pueden usar en línea o sin conexión.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0"/><path d="M3 3l18 18"/></svg>
+        <div><b>Funciona sin internet</b><span>Servidor local en la sede y copias descargables.</span></div>
+      </div>
+      <div class="pillar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9.5a3.5 3.5 0 1 0 0 5"/></svg>
+        <div><b>Recursos con licencia abierta</b><span>Creative Commons o dominio público, con autoría reconocida.</span></div>
+      </div>
+      <div class="pillar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21V10M12 13c-5 0-7-4-7-7 4 0 7 3 7 7zM12 10c0-5 3-7 7-7 0 4-3 7-7 7z"/></svg>
+        <div><b>Pensado para el campo</b><span>Contenidos ligados al énfasis agropecuario y comercial.</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="block" id="repositorio">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Repositorio</h2>
+        <p>Muestra de recursos abiertos existentes y ejemplos de recursos institucionales por elaborar. Cada uno tiene su ficha de metadatos.</p>
+      </div>
+      <div class="toolbar" role="search">
+        <div class="search"><label for="q">Buscar</label><input id="q" type="search" placeholder="Título, tema o palabra clave"></div>
+        <div><label for="fArea">Área</label><select id="fArea"></select></div>
+        <div><label for="fGrado">Grado</label><select id="fGrado"></select></div>
+        <div><label for="fTipo">Tipo</label><select id="fTipo"></select></div>
+        <div><label for="fConex">Conexión</label><select id="fConex"><option value="">Todas</option><option value="off">Funciona sin internet</option><option value="on">Requiere internet</option></select></div>
+      </div>
+      <p class="result-line" id="count" aria-live="polite"></p>
+      <div class="grid" id="list"></div>
+    </div>
+  </section>
+
+  <section class="block" id="propuesta">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>La propuesta en 5W+H</h2>
+        <p>Qué es el repositorio, por qué lo necesita la sede, cuándo, quién, cómo y dónde se implementa.</p>
+      </div>
+      <div class="wh">
+        <article class="whcard">
+          <span class="q">Qué</span>
+          <h3>Un repositorio REDA institucional, en línea y sin conexión</h3>
+          <p>Es una colección organizada de Recursos Educativos Digitales Abiertos para todas las áreas y grados de la sede: guías, simulaciones, videos, audios, juegos y lecturas. Cada recurso tiene licencia abierta y una ficha de metadatos (área, grado, referente curricular, objetivo, formato, conexión requerida y autor).</p>
+          <p>Incluye dos tipos de contenido: recursos abiertos seleccionados de fuentes reconocidas y recursos propios creados por los docentes de la sede con su contexto rural.</p>
+        </article>
+        <article class="whcard">
+          <span class="q">Por qué</span>
+          <h3>Conectividad limitada, recursos dispersos y riesgo de deserción</h3>
+          <ul>
+            <li>La conexión a internet en la sede es limitada e intermitente, lo que impide usar muchos recursos en línea durante las clases.</li>
+            <li>Los materiales de los docentes están dispersos en memorias, correos y celulares, y no se comparten entre áreas.</li>
+            <li>En la básica secundaria rural hay riesgo de desvinculación escolar; recursos interactivos y cercanos al contexto ayudan a mantener el interés de los estudiantes.</li>
+            <li>El énfasis técnico agropecuario y comercial de la institución necesita contenidos que conecten las áreas con el trabajo del campo.</li>
+          </ul>
+        </article>
+
+        <article class="whcard wide">
+          <span class="q">Por qué · PEI</span>
+          <h3>Alineación con el Proyecto Educativo Institucional</h3>
+          <div class="how">
+            <div><b>Misión</b>
+              <p>La IETAC busca "la creación de espacios de aprendizajes que le conduzcan a continuar estudios tecnológicos y superiores" y la productividad "dentro del contexto local, regional y nacional". El repositorio es ese espacio de aprendizaje, disponible en el aula y en casa, con recursos ligados a la media técnica y a la vida productiva de la región.</p>
+            </div>
+            <div><b>Visión 2027</b>
+              <p>La institución aspira a formar un educando "gestor de cambios, emprendedor y dinámico" y "competitivo en el mundo globalizado". El repositorio desarrolla competencias digitales, acerca a los estudiantes a recursos de calidad mundial y les permite crear y publicar sus propios recursos.</p>
+            </div>
+            <div><b>Filosofía</b>
+              <p>El PEI concibe al estudiante como un ser integral que resuelve problemas "con la ayuda mutua y el contacto con su entorno". El repositorio se construye de forma colaborativa entre docentes, estudiantes y comunidad, con recursos sobre la parcela, el corregimiento y su historia.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="whcard wide">
+          <span class="q">Cuándo</span>
+          <h3>Cinco fases en un año escolar</h3>
+          <div class="phases">
+            <div class="phase"><span class="when">Mes 1–2</span><b>Diagnóstico y alistamiento</b><span>Inventario de equipos y conectividad, encuesta a docentes y estudiantes, conformación del comité REDA.</span></div>
+            <div class="phase"><span class="when">Mes 2–3</span><b>Montaje tecnológico</b><span>Instalación del servidor local, red WiFi interna y versión en línea; capacitación docente en licencias y metadatos.</span></div>
+            <div class="phase"><span class="when">Mes 3–5</span><b>Curaduría y producción</b><span>Selección de recursos abiertos por área y creación de los primeros recursos propios.</span></div>
+            <div class="phase"><span class="when">Mes 6–7</span><b>Pilotaje</b><span>Uso en clases de 6° a 9°, registro de uso y ajustes según la retroalimentación.</span></div>
+            <div class="phase"><span class="when">Mes 8–10</span><b>Ampliación y evaluación</b><span>Extensión a 10° y 11°, evaluación de impacto e inclusión en el plan de mejoramiento.</span></div>
+          </div>
+        </article>
+
+        <article class="whcard wide">
+          <span class="q">Quién</span>
+          <h3>Responsables, usuarios y beneficiarios</h3>
+          <div class="tablebox">
+            <table>
+              <thead><tr><th>Actor</th><th>Rol</th><th>Qué hace</th></tr></thead>
+              <tbody>
+                <tr><td>Comité REDA</td><td>Responsable</td><td>Coordinador de la sede y un docente por área. Revisa, aprueba y publica los recursos; vela por las licencias y la calidad.</td></tr>
+                <tr><td>Administrador técnico</td><td>Responsable</td><td>Docente de Tecnología e Informática. Mantiene el servidor local, las copias de seguridad y la sincronización con la versión en línea.</td></tr>
+                <tr><td>Docentes de todas las áreas</td><td>Usuarios y autores</td><td>Buscan y usan recursos en sus clases, crean recursos propios y los proponen al comité.</td></tr>
+                <tr><td>Monitores TIC (10° y 11°)</td><td>Apoyo</td><td>Estudiantes de servicio social que ayudan a cargar recursos y orientan a sus compañeros.</td></tr>
+                <tr><td>Estudiantes de 6° a 11°</td><td>Usuarios y beneficiarios</td><td>Acceden a los recursos en clase, en la sala de informática y en casa sin conexión.</td></tr>
+                <tr><td>Familias y comunidad</td><td>Beneficiarios</td><td>Acompañan el aprendizaje en casa con recursos descargados y conocen los proyectos productivos de la sede.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="whcard wide">
+          <span class="q">Cómo</span>
+          <h3>Estrategia pedagógica, tecnológica y de gestión</h3>
+          <div class="how">
+            <div><b>Pedagógica</b><ul>
+              <li>Recursos alineados con los Estándares Básicos de Competencias y los DBA.</li>
+              <li>Aprendizaje basado en proyectos ligado al campo: parcelas, cultivos, tienda escolar.</li>
+              <li>Retos gamificados para motivar la participación y la permanencia.</li>
+            </ul></div>
+            <div><b>Tecnológica</b><ul>
+              <li>Servidor local (un computador o mini-PC con Kolibri, plataforma libre para contextos sin internet) y red WiFi interna en la sede.</li>
+              <li>Versión en línea que se sincroniza cuando hay conexión.</li>
+              <li>Recursos livianos y copias en memorias USB para casa.</li>
+            </ul></div>
+            <div><b>Gestión</b><ul>
+              <li>Protocolo de publicación con revisión del comité.</li>
+              <li>Jornadas de capacitación docente cada periodo.</li>
+              <li>Inclusión en el plan de mejoramiento institucional e indicadores de uso.</li>
+            </ul></div>
+          </div>
+          <div class="flow" aria-label="Protocolo de publicación">
+            <span>El docente propone</span><i>→</i><span>Completa la ficha y elige licencia</span><i>→</i><span>El comité revisa</span><i>→</i><span>Se publica y se sincroniza</span><i>→</i><span>Se evalúa su uso</span>
+          </div>
+        </article>
+
+        <article class="whcard wide">
+          <span class="q">Dónde</span>
+          <h3>Escenarios institucionales de impacto</h3>
+          <ul>
+            <li><b>Aulas de clase:</b> los estudiantes se conectan a la red interna desde tabletas o computadores, sin depender de internet.</li>
+            <li><b>Sala de informática:</b> trabajo con simulaciones, programación y producción de recursos.</li>
+            <li><b>Proyectos productivos y granja escolar:</b> guías y bitácoras para las prácticas agropecuarias y comerciales.</li>
+            <li><b>Hogares:</b> recursos descargados para repasar y ponerse al día cuando un estudiante falta.</li>
+            <li><b>Nivelación y talleres de recuperación:</b> material de refuerzo organizado por grado y área.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="licencias">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Licencias abiertas</h2>
+        <p>Lo que hace "abierto" a un recurso es su licencia: dice cómo se puede usar, adaptar y compartir. Estas son las que acepta el repositorio.</p>
+      </div>
+      <div class="lic-grid">
+        <div class="lic-card"><code>CC BY</code><p>Se puede usar, adaptar y compartir, incluso con fines comerciales, citando al autor.</p></div>
+        <div class="lic-card"><code>CC BY-SA</code><p>Igual que CC BY, pero las adaptaciones deben compartirse con la misma licencia. Recomendada para los recursos propios de la sede.</p></div>
+        <div class="lic-card"><code>CC BY-NC-SA</code><p>Se puede usar y adaptar sin fines comerciales, citando al autor y con la misma licencia.</p></div>
+        <div class="lic-card"><code>Dominio público</code><p>Obras sin derechos patrimoniales vigentes, de uso libre.</p></div>
+        <div class="lic-card"><code>Autoría</code><p>Todo recurso indica autor, fuente y fecha, conforme a la Ley 23 de 1982 sobre derechos de autor.</p></div>
+        <div class="lic-card"><code>Uso de IA</code><p>Si un recurso se elaboró con apoyo de inteligencia artificial, la ficha lo declara y nombra la herramienta.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="publicar">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Publicar un recurso</h2>
+        <p>Así propone un docente un recurso al comité. La ficha se arma mientras escribe. En esta propuesta el formulario es una demostración y no guarda datos.</p>
+      </div>
+      <div class="form-wrap">
+        <form class="form" id="form">
+          <div class="full"><label for="t">Título</label><input id="t" placeholder="Ej.: Calculemos el área de la parcela" required></div>
+          <div><label for="au">Autor</label><input id="au" placeholder="Nombre del docente"></div>
+          <div><label for="ar">Área</label><select id="ar"></select></div>
+          <div><label for="gr">Grado</label><select id="gr"></select></div>
+          <div><label for="ti">Tipo</label><select id="ti"></select></div>
+          <div class="full"><label for="ob">Objetivo de aprendizaje</label><input id="ob" placeholder="Qué aprenderá el estudiante con este recurso"></div>
+          <div><label for="li">Licencia</label><select id="li"><option>CC BY-SA 4.0</option><option>CC BY 4.0</option><option>CC BY-NC-SA 4.0</option><option>Dominio público</option></select></div>
+          <div><label for="cx">Conexión</label><select id="cx"><option value="off">Funciona sin internet</option><option value="on">Requiere internet</option></select></div>
+          <div class="full"><label for="ia">¿Se usó inteligencia artificial?</label><select id="ia"><option>No</option><option>Sí, para apoyo en la redacción</option><option>Sí, para generar imágenes</option></select></div>
+          <button type="submit">Enviar al comité REDA</button>
+        </form>
+        <aside class="preview" aria-live="polite">
+          <div class="area" id="pvArea">Área</div>
+          <h3 id="pvTitle">Título del recurso</h3>
+          <dl class="meta" id="pvMeta"></dl>
+          <span class="status" id="pvStatus">Borrador</span>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <b>EducaRED Santo Domingo</b> · Propuesta académica de repositorio REDA para la Institución Educativa Técnica Agropecuaria y Comercial de San Pablo, sede Santo Domingo, corregimiento de Santo Domingo, sur de Bolívar.<br>
+      Maestría en Recursos Digitales aplicados a la Educación · 2026
+    </div>
+    <div>
+      <b>Equipo:</b> Claudia Patricia Gil Rodríguez, Fabian David Arrieta Díaz, Óscar Eduardo Monterroza Escorcia y Santiago Cuadrado Puentes.<br>
+      Elaborado con apoyo de Claude (Anthropic) como asistente de diseño y redacción.
+    </div>
+  </div>
+</footer>
+
+<script>
+const AREAS=["Matemáticas","Lenguaje","Ciencias Naturales","Ciencias Sociales","Inglés","Tecnología e Informática","Técnica Agropecuaria","Técnica Comercial"];
+const GRADOS=["6°","7°","8°","9°","10°","11°"];
+const TIPOS=["Simulación","Curso interactivo","Guía","Lectura","Audio","Juego","Aplicación"];
+
+const R=[
+ {t:"Constructor de áreas",a:"Matemáticas",g:["6°","7°"],tipo:"Simulación",c:"off",d:"Construye figuras con cuadrados de unidad y explora la relación entre área y perímetro.",ref:"Pensamiento métrico y sistemas de medidas",obj:"Calcular áreas y perímetros de figuras compuestas.",lic:"CC BY 4.0",au:"PhET, Universidad de Colorado Boulder",fmt:"HTML5 (descargable para uso sin conexión)",url:"https://phet.colorado.edu/es/simulations/area-builder"},
+ {t:"Graficando líneas",a:"Matemáticas",g:["8°","9°"],tipo:"Simulación",c:"off",d:"Manipula la pendiente y el intercepto de una recta y observa cómo cambia su ecuación.",ref:"Pensamiento variacional y sistemas algebraicos",obj:"Relacionar la ecuación de una recta con su gráfica.",lic:"CC BY 4.0",au:"PhET, Universidad de Colorado Boulder",fmt:"HTML5 (descargable para uso sin conexión)",url:"https://phet.colorado.edu/es/simulations/graphing-lines"},
+ {t:"Estadística y probabilidad",a:"Matemáticas",g:["10°","11°"],tipo:"Curso interactivo",c:"on",d:"Videos y ejercicios con retroalimentación sobre análisis de datos, gráficas y probabilidad.",ref:"Pensamiento aleatorio y sistemas de datos",obj:"Interpretar datos y calcular probabilidades de eventos.",lic:"CC BY-NC-SA",au:"Khan Academy en español",fmt:"Web",url:"https://es.khanacademy.org/math/statistics-probability"},
+ {t:"Construye un átomo",a:"Ciencias Naturales",g:["8°","9°"],tipo:"Simulación",c:"off",d:"Agrega protones, neutrones y electrones para construir átomos e iones y ver cómo cambian su carga y masa.",ref:"Entorno físico: procesos químicos",obj:"Explicar la estructura del átomo y su relación con la tabla periódica.",lic:"CC BY 4.0",au:"PhET, Universidad de Colorado Boulder",fmt:"HTML5 (descargable para uso sin conexión)",url:"https://phet.colorado.edu/es/simulations/build-an-atom"},
+ {t:"Escala de pH",a:"Ciencias Naturales",g:["10°","11°"],tipo:"Simulación",c:"off",d:"Mide el pH de sustancias cotidianas y observa el efecto de diluirlas con agua.",ref:"Entorno físico: procesos químicos",obj:"Clasificar sustancias como ácidas, básicas o neutras.",lic:"CC BY 4.0",au:"PhET, Universidad de Colorado Boulder",fmt:"HTML5 (descargable para uso sin conexión)",url:"https://phet.colorado.edu/es/simulations/ph-scale"},
+ {t:"Scratch",a:"Tecnología e Informática",g:["6°","7°","8°","9°"],tipo:"Aplicación",c:"off",d:"Entorno de programación por bloques para crear historias, juegos y animaciones. Tiene versión de escritorio que funciona sin internet.",ref:"Orientaciones para Tecnología e Informática: solución de problemas con tecnología",obj:"Diseñar algoritmos y programas sencillos.",lic:"Gratuita; proyectos compartidos con CC BY-SA 2.0",au:"Fundación Scratch, MIT",fmt:"Aplicación de escritorio y web",url:"https://scratch.mit.edu/download"},
+ {t:"Obras en español de dominio público",a:"Lenguaje",g:["9°","10°","11°"],tipo:"Lectura",c:"off",d:"Colección de libros digitales en español, descargables en EPUB y otros formatos para leer sin conexión.",ref:"Literatura: lectura e interpretación de obras",obj:"Leer y analizar obras clásicas de la literatura en español.",lic:"Dominio público",au:"Proyecto Gutenberg",fmt:"EPUB, HTML, texto",url:"https://www.gutenberg.org/browse/languages/es"},
+ {t:"Publicaciones técnicas de la FAO",a:"Técnica Agropecuaria",g:["10°","11°"],tipo:"Lectura",c:"off",d:"Repositorio de manuales y guías sobre agricultura, suelos, agua y producción, descargables en PDF.",ref:"Media técnica agropecuaria",obj:"Consultar prácticas sostenibles de producción agrícola y pecuaria.",lic:"Mayoría con CC BY-NC-SA 3.0 IGO (verificar en cada documento)",au:"Organización de las Naciones Unidas para la Alimentación y la Agricultura (FAO)",fmt:"PDF",url:"https://openknowledge.fao.org"},
+ {t:"Calculemos el área de la parcela",a:"Matemáticas",g:["8°"],tipo:"Juego",inst:true,c:"off",d:"Reto gamificado por niveles: los estudiantes miden parcelas de la vereda y calculan áreas para planear una siembra.",ref:"Pensamiento espacial y métrico",obj:"Aplicar el cálculo de áreas a situaciones del campo.",lic:"CC BY-SA 4.0",au:"Docente de Matemáticas, sede Santo Domingo",fmt:"Guía PDF y tarjetas de reto"},
+ {t:"Voces de mi corregimiento",a:"Lenguaje",g:["6°","7°"],tipo:"Audio",inst:true,c:"off",d:"Pódcast con relatos y tradiciones contados por mayores de Santo Domingo, grabados por los estudiantes.",ref:"Producción textual y tradición oral",obj:"Narrar y transcribir relatos de la tradición oral local.",lic:"CC BY-SA 4.0",au:"Docentes de Lenguaje y estudiantes de la sede",fmt:"MP3 y transcripción"},
+ {t:"Bitácora del cultivo de maíz",a:"Técnica Agropecuaria",g:["10°"],tipo:"Guía",inst:true,c:"off",d:"Formato para registrar siembra, riego, crecimiento y cosecha en la granja escolar, con tablas y gráficas.",ref:"Media técnica agropecuaria",obj:"Registrar y analizar datos de un proceso productivo.",lic:"CC BY-SA 4.0",au:"Docente de Cultivos Agrícolas, sede Santo Domingo",fmt:"Hoja de cálculo y PDF"},
+ {t:"Mi tienda escolar",a:"Técnica Comercial",g:["9°"],tipo:"Juego",inst:true,c:"off",d:"Simulación de una tienda con inventario, compras, ventas y ganancias para practicar contabilidad básica.",ref:"Media técnica comercial",obj:"Llevar registros contables sencillos de un negocio.",lic:"CC BY-SA 4.0",au:"Docentes de la sede",fmt:"Hoja de cálculo"},
+ {t:"English around the farm",a:"Inglés",g:["6°","7°"],tipo:"Guía",inst:true,c:"off",d:"Tarjetas de vocabulario e imágenes de animales, cultivos y herramientas del campo, con audio de pronunciación.",ref:"Estándares de inglés: vocabulario de su entorno",obj:"Usar vocabulario básico en inglés sobre su entorno rural.",lic:"CC BY-SA 4.0",au:"Docente de Inglés, sede Santo Domingo",fmt:"PDF y MP3"},
+ {t:"Línea de tiempo del sur de Bolívar",a:"Ciencias Sociales",g:["9°","10°"],tipo:"Guía",inst:true,c:"off",d:"Recurso para construir, con entrevistas a la comunidad, la historia del poblamiento y la economía de la región.",ref:"Relaciones con la historia y las culturas",obj:"Reconstruir procesos históricos locales a partir de fuentes orales.",lic:"CC BY-SA 4.0",au:"Docente de Ciencias Sociales, sede Santo Domingo",fmt:"PDF"}
+];
+
+const $=id=>document.getElementById(id);
+function fill(sel,items,all){sel.innerHTML=(all?`<option value="">${all}</option>`:"")+items.map(x=>`<option>${x}</option>`).join("")}
+fill($("fArea"),AREAS,"Todas");fill($("fGrado"),GRADOS,"Todos");fill($("fTipo"),TIPOS,"Todos");
+fill($("ar"),AREAS);fill($("gr"),GRADOS);fill($("ti"),TIPOS);
+
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+
+function card(r){
+  const conex=r.c==="off"?'<span class="chip off">Sin internet</span>':'<span class="chip on">En línea</span>';
+  const origin=r.inst?'<span class="chip inst">Ejemplo institucional · por elaborar</span>':'';
+  const link=r.url?`<a class="go" href="${esc(r.url)}" target="_blank" rel="noopener">Abrir recurso</a>`:`<span class="go muted">Se publicará en la fase 3</span>`;
+  return `<article class="res">
+    <div class="res-top"><span class="area">${esc(r.a)}</span>${origin}</div>
+    <h3>${esc(r.t)}</h3>
+    <p class="desc">${esc(r.d)}</p>
+    <div class="chips"><span class="chip">${esc(r.tipo)}</span><span class="chip">${r.g.join(", ")}</span>${conex}<span class="chip lic">${esc(r.lic)}</span></div>
+    ${link}
+    <details class="ficha"><summary>Ficha de metadatos</summary>
+      <dl class="meta">
+        <dt>Autor</dt><dd>${esc(r.au)}</dd>
+        <dt>Referente</dt><dd>${esc(r.ref)}</dd>
+        <dt>Objetivo</dt><dd>${esc(r.obj)}</dd>
+        <dt>Formato</dt><dd>${esc(r.fmt)}</dd>
+        <dt>Licencia</dt><dd>${esc(r.lic)}</dd>
+        <dt>Grados</dt><dd>${r.g.join(", ")}</dd>
+      </dl>
+    </details>
+  </article>`;
+}
+function render(){
+  const q=norm($("q").value.trim()),a=$("fArea").value,g=$("fGrado").value,t=$("fTipo").value,c=$("fConex").value;
+  const out=R.filter(r=>(!a||r.a===a)&&(!g||r.g.includes(g))&&(!t||r.tipo===t)&&(!c||r.c===c)&&(!q||norm([r.t,r.d,r.a,r.ref,r.obj,r.au].join(" ")).includes(q)));
+  $("count").textContent=`${out.length} de ${R.length} recursos · ${R.filter(r=>!r.inst).length} abiertos existentes y ${R.filter(r=>r.inst).length} ejemplos institucionales`;
+  $("list").innerHTML=out.length?out.map(card).join(""):`<div class="empty">No hay recursos con esos filtros. Prueba con otra área o grado.</div>`;
+}
+["q","fArea","fGrado","fTipo","fConex"].forEach(id=>$(id).addEventListener("input",render));
+render();
+
+function preview(){
+  $("pvArea").textContent=$("ar").value;
+  $("pvTitle").textContent=$("t").value||"Título del recurso";
+  const rows=[["Autor",$("au").value||"—"],["Grado",$("gr").value],["Tipo",$("ti").value],["Objetivo",$("ob").value||"—"],["Licencia",$("li").value],["Conexión",$("cx").value==="off"?"Funciona sin internet":"Requiere internet"],["Uso de IA",$("ia").value]];
+  $("pvMeta").innerHTML=rows.map(([k,v])=>`<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
+}
+document.querySelectorAll("#form input,#form select").forEach(el=>el.addEventListener("input",()=>{preview();$("pvStatus").textContent="Borrador"}));
+$("form").addEventListener("submit",e=>{e.preventDefault();preview();$("pvStatus").textContent="Enviado al comité REDA para revisión (demostración)"});
+preview();
+</script>
